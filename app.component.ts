@@ -1,40 +1,37 @@
 import { Component } from '@angular/core';
 
-interface ICalculationLine {
-  startValue: number;
-  operator: string;
-  parameter: number;
-  result: number;
-}
-
 @Component({
-  selector: 'my-app',
+  selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: [ './app.component.css' ]
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent  {
-  public startValue = 5;
-  public height = 9;
-  public result: ICalculationLine[];
 
-  public calculate() {
-    this.result = [];
-    let x = this.startValue;
-    for(let row = 2;row <= this.height; row++) {
-      this.result.push({
-        startValue: x,
-        operator: '*',
-        parameter: row,
-        result: x = x * row
-      });
-    }
-    for(let row = 2;row <= this.height; row++) {
-      this.result.push({
-        startValue: x,
-        operator: '/',
-        parameter: row,
-        result: x = x / row
-      });
+export class AppComponent {
+  public startValue: number;
+  public height: number;
+  public validHeight: boolean = true;
+  public result: string[];
+
+  public calculate() {        
+    if(this.height > 2) {
+      this.validHeight = true;
+      this.result = [];            
+      let x = this.startValue;
+      let num: number;      
+
+      for(let row = 2;row <= this.height; row++) {  
+        num = x * row;      
+        this.result.push(x + ' * ' + row + ' = ' + num);
+        x = num;
+      }
+      for(let row = 2;row <= this.height; row++) {      
+        num = x / row;  
+        this.result.push(x + ' / ' + row + ' = ' + num);
+        x = num;
+      }
+    }else{
+      this.validHeight = false;
     }
   }
+
 }

@@ -1,7 +1,6 @@
-.error-message {
-  color: red;
+.error-msg {
+    color: red;
 }
-
 td.right {
-  text-align: right;
+    text-align: right;
 }
